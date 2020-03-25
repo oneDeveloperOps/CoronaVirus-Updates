@@ -5,6 +5,10 @@ import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Container from '@material-ui/core/Container';
+
+
+
+
 import axios from 'axios'
 const useStyles = makeStyles(theme => ({
     root: {
@@ -31,7 +35,8 @@ const useStyles = makeStyles(theme => ({
 const SearchByCountry = ()=> {
 
     const [state , formData] = useState({
-        query: ''
+        query: '',
+        data: []
     })
 
 
@@ -54,13 +59,35 @@ const SearchByCountry = ()=> {
             }
             })
             .then((response)=>{
-            console.log(response)
+                formData({
+                    data:[response.data]
+                })
+                console.log(response)
             })
             .catch((error)=>{
             console.log(error)
             })
         }
+        console.log(state.data)
     }
+
+    const res = state.data.map(res => {
+        return (<div> 
+            
+            {res.country} <br/>
+            {res.latest_stat_by_country[0].total_cases}<br/>
+            {res.latest_stat_by_country[0].new_cases}<br/>
+            {res.latest_stat_by_country[0].active_cases}<br/>
+            {res.latest_stat_by_country[0].total_deaths}<br/>
+            {res.latest_stat_by_country[0].new_deaths}<br/>
+            {res.latest_stat_by_country[0].total_recovered}<br/>
+            {res.latest_stat_by_country[0].serious_critical}<br/>
+            {res.latest_stat_by_country[0].region}<br/>
+            {res.latest_stat_by_country[0].total_cases_per1m}<br/>
+            {res.latest_stat_by_country[0].record_date}
+            
+            </div>)
+    })
 
     return (
         <Container fixed>
@@ -77,6 +104,7 @@ const SearchByCountry = ()=> {
                 <SearchIcon />
             </IconButton>
         </Paper>
+        {res}
         </Container>
     )
 }

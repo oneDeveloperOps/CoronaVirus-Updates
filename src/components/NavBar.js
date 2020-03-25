@@ -7,6 +7,7 @@ import {NavLink} from 'react-router-dom'
 const useStyles = makeStyles({
   list: {
     width: 250,
+    textDecoration: 'none'
   },
 });
 
@@ -15,12 +16,12 @@ export default function NavBar() {
   return (
     <div>
        <List>
-           <NavLink to='/all'>
+           <NavLink style={{ textDecoration: 'none' , color: 'black'}} to='/all'>
                 <ListItem className={classes.list} button>
                     <ListItemText primary="All Data"/>
                 </ListItem>
            </NavLink>
-           <NavLink to='/search'>
+           <NavLink style={{ textDecoration: 'none' ,  color: 'black'}} to='/search'>
                 <ListItem className={classes.list} button>
                     <ListItemText primary="Search By Country"/>
                 </ListItem>
